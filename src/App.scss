@@ -1,0 +1,194 @@
+$Dark_Blue: hsl(209, 23%, 22%);
+$Light_Mode_Text: hsl(200, 15%, 8%);
+$Light_Mode_Input: hsl(0, 0%, 52%);
+$Light_Mode_Background: hsl(0, 0%, 98%);
+$Light_Mode_Elements: hsl(0, 0%, 100%);
+* {
+  box-sizing: border-box;
+  font-family: "Nunito sans";
+}
+
+body {
+  background-color: $Light_Mode_Background;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $Light_Mode_Elements;
+  height: 80px;
+  padding: 0 20px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+
+  .logo {
+    display: block;
+    font-weight: bold;
+    font-size: 1em;
+  }
+}
+
+.searchBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 3em;
+  margin-top: 50px;
+  padding: 0 20px;
+
+  //Barre de recherche
+  .searchBox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    height: 70px;
+    background-color: $Light_Mode_Elements;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+    padding: 0 10px;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .searchBox input {
+    width: 80%;
+    height: 100%;
+    border: none;
+  }
+
+  .searchBox input:focus {
+    outline: none;
+  }
+
+  .searchBox svg {
+    width: 20%;
+  }
+
+  //Select pour les filtres
+  .filterBox {
+    position: relative;
+  }
+
+  .filterBox .select {
+    position: relative;
+    width: 300px;
+    padding: 20px 25px;
+    background-color: $Light_Mode_Elements;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+
+  .filterBox .select svg {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s;
+  }
+
+  .filterBox .select input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .filterBox .select input:checked ~ .optionGroup {
+    visibility: visible;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .filterBox .select .optionGroup {
+    position: absolute;
+    bottom: -350%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    row-gap: 0.8em;
+    padding: 20px 25px;
+    background-color: $Light_Mode_Elements;
+    border-radius: 5px;
+    transition: all 0.3s;
+    animation-duration: 0.3s;
+    animation: slidein;
+  }
+
+  .filterBox .select .optionGroup .option {
+    cursor: pointer;
+  }
+
+  @keyframes slidein {
+    from {
+      transform: scale(0);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 40px;
+  margin-top: 70px;
+  padding: 0 20px;
+
+  .card {
+    flex-basis: 100%;
+    height: 400px;
+    background-color: $Light_Mode_Elements;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card .flag{
+    overflow: hidden;
+  }
+  
+  .card .flag img {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    transition: .3s;
+  }
+
+  .card .flag img:hover{
+    transform: scale(1.2);
+  }
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .header {
+    padding: 0 50px;
+  }
+  .searchBar {
+    padding: 0 50px;
+  }
+  .container {
+    padding: 0 50px;
+  }
+  .container .card {
+    flex-basis:22%;
+  }
+}
+
+// @media only screen and (max-width: 960px){
+//   .container .card {
+//     flex-basis:30%;
+//   }
+// }
