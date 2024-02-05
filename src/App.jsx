@@ -17,7 +17,7 @@ import { Details } from "./Components/CountryDetails/CountryDetails.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/Rest-countries-api/",
     element: <Root />,
     errorElement: <PageError />,
     children: [
