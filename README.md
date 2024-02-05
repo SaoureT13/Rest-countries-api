@@ -22,14 +22,17 @@ This is a solution to the [Job listings with filtering challenge on Frontend Men
 
 Users should be able to:
 
-- View the optimal layout for the site depending on their device's screen size
-- See hover states for all interactive elements on the page
-- Filter job listings based on the categories
+- See all countries from the API on the homepage
+- Search for a country using an `input` field
+- Filter countries by region
+- Click on a country to see more detailed information on a separate page
+- Click through to the border countries on the detail page
+- Toggle the color scheme between light and dark mode *(optional)*
 
 
 ### Links
 
-- Solution URL: (https://github.com/SaoureT13/Static-job-listing-masters)
+- Solution URL: (https://github.com/SaoureT13/Rest-countries-api.git)
 - Live Site URL: (https://saouret13.github.io/Static-job-listing-masters/)
 
 ## My process
