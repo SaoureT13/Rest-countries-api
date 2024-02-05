@@ -14,8 +14,8 @@ export function Card({ datas }) {
           data-name={data.name.common}
         >
           <img
-            src={data.flags.png}
-            alt={data.flags.alt}
+            src={data?.flags.png}
+            alt={data?.flags.alt}
             width={360}
             height={180}
           />
@@ -24,13 +24,13 @@ export function Card({ datas }) {
       <div className="body">
         <h3 className="countryName">{data.name.common}</h3>
         <p className="countryPopulation">
-          <span className="bold">Population:</span> {data.population.toLocaleString()}
+          <span className="bold">Population:</span> {data?.population.toLocaleString()}
         </p>
         <p className="countryRegion">
-          <span className="bold">Region:</span> {data.region}
+          <span className="bold">Region:</span> {data?.region}
         </p>
         <p className="countryCapital">
-          <span className="bold">Capital:</span> {data.capital}
+          <span className="bold">Capital:</span> {data?.capital}
         </p>
       </div>
     </div>
