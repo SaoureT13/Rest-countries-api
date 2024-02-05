@@ -19,7 +19,7 @@ export function Details() {
 
     if (filteredData.length > 0) {
       const newCountryName = filteredData[0].name.common;
-      navigate(`/${encodeURIComponent(newCountryName)}`);
+      navigate(`/Rest-countries-api/${encodeURIComponent(newCountryName)}`);
     } else {
       console.error("Invalid country name");
     }
@@ -27,7 +27,7 @@ export function Details() {
 
   return (
     <main className="main">
-      <NavLink to="/" className="back_btn">
+      <NavLink to="/Rest-countries-api" className="back_btn">
         Back
       </NavLink>
       <div className="wrapper">

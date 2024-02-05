@@ -17,7 +17,7 @@ import { Details } from "./Components/CountryDetails/CountryDetails.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/Rest-countries-api/",
+    path: "Rest-countries-api",
     element: <Root />,
     errorElement: <PageError />,
     children: [
@@ -90,7 +90,7 @@ function Root() {
 
       <Outlet></Outlet>
       {/*Je me suis basé sur la longueur de mon url pour afficher tous les pays ou non, parce que j'avais pas d'autre idée*/}
-      {location.pathname.length == 1 && (
+      {location.pathname.length >= 1 && (
         <div className="container">
           <SearchBar
             placeHolder="Search for a country..."

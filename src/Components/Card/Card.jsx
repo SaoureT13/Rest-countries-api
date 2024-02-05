@@ -7,7 +7,7 @@ export function Card({ datas }) {
 
   return (datas ?? []).map((data, index) => (
     <div className="card" key={index}>
-      <NavLink to={`/${encodeURIComponent(data.name.common)}`}>
+      <NavLink to={`${encodeURIComponent(data.name.common)}`}>
         <div
           className="flag"
           // onClick={() => onClick(data.name.common)}
