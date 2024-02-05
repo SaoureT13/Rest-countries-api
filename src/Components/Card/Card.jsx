@@ -3,8 +3,7 @@
 import { NavLink } from "react-router-dom";
 
 export function Card({ datas }) {
-//   const datas = useContext(DatasContext);
-
+  //   const datas = useContext(DatasContext);
 
   return (datas ?? []).map((data, index) => (
     <div className="card" key={index}>
@@ -18,15 +17,21 @@ export function Card({ datas }) {
             src={data.flags.png}
             alt={data.flags.alt}
             width={360}
-            height={200}
+            height={180}
           />
         </div>
       </NavLink>
       <div className="body">
-        <p className="countryName">{data.name.common}</p>
-        <p className="countryPopulation">Population: {data.population}</p>
-        <p className="countryRegion">Region: {data.region}</p>
-        <p className="countryCapital">Capital: {data.capital}</p>
+        <h3 className="countryName">{data.name.common}</h3>
+        <p className="countryPopulation">
+          <span className="bold">Population:</span> {data.population.toLocaleString()}
+        </p>
+        <p className="countryRegion">
+          <span className="bold">Region:</span> {data.region}
+        </p>
+        <p className="countryCapital">
+          <span className="bold">Capital:</span> {data.capital}
+        </p>
       </div>
     </div>
   ));

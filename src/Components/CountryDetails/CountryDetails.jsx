@@ -1,88 +1,97 @@
-import { useEffect, useState } from "react";
-import { NavLink, useLoaderData, useNavigation } from "react-router-dom";
+import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
 
 export function Details() {
-  //Cette option m'arrange pas, parce que je dois aussi pouvoir afficher les informations des pays voisins lorsqu'on clique sur les btn qui sont dans le footer
-  // const { currentCountry } = useLoaderData();
+  const { datas, currentCountry } = useLoaderData();
 
-  const { datas } = useLoaderData();
-  const { countryName } = useLoaderData();
-  const [currentCountry, setCurrentCountry] = useState([]);
+  // const { countryName } = useParams();
+
   //Pour changer l'url
-  const navigate = useNavigation();
-
-  useEffect(() => {
-    //garder que le pays qui m'interesse
-    const country = datas.filter((data) => data.name.common === countryName);
-    setCurrentCountry(country);
-  }, [datas, countryName]);
+  const navigate = useNavigate();
 
   const navigateToCountry = (country) => {
-    const filteredData = datas.filter((data) =>
-      data.altSpellings.includes(country)
+    const filteredData = datas.filter(
+      (data) =>
+        data.cioc === country ||
+        data.cca2 === country ||
+        data.ccn3 === country ||
+        data.cca3 === country
     );
 
     if (filteredData.length > 0) {
       const newCountryName = filteredData[0].name.common;
-      navigate(`/${newCountryName}`);
+      navigate(`/${encodeURIComponent(newCountryName)}`);
     } else {
-      console.error("Country not found");
+      console.error("Invalid country name");
     }
   };
 
   return (
     <main className="main">
-      <div className="left">
-        {/* <button className="back" onClick={handleBack}>
-          Back
-        </button> */}
-        <NavLink to="/">Back</NavLink>
-
-        <div>
+      <NavLink to="/" className="back_btn">
+        Back
+      </NavLink>
+      <div className="wrapper">
+        <div className="left">
           <img
-            src={currentCountry[0].flags.png}
-            alt={currentCountry[0].flags.alt}
+            src={currentCountry.flags.png}
+            alt={currentCountry.flags.alt}
           />
         </div>
-      </div>
-      <div className="right">
-        <div className="title">
-          <h1>{currentCountry[0].name.common}</h1>
-        </div>
-        <div className="body">
-          <div className="sup">
-            <p>
-              Native Name:{" "}
-              {Object.values(currentCountry[0].name.nativeName)[0].common}
-            </p>
-            <p>Population: {currentCountry[0].population}</p>
-            <p>Region: {currentCountry[0].region}</p>
-            <p>Sub Region: {currentCountry[0].subregion}</p>
-            <p>Capital: {currentCountry[0].capital}</p>
+        <div className="right">
+          <div className="title">
+            <h1>{currentCountry.name.common}</h1>
           </div>
-          <div className="sub">
-            <p>Top Level Domain: {currentCountry[0].tld}</p>
-            <p>
-              Currencies: {Object.values(currentCountry[0].currencies)[0].name}
-            </p>
-            <p>
-              Languages: {Object.values(currentCountry[0].languages).join(", ")}
-            </p>
+          <div className="body">
+            <div className="sup">
+              <p>
+                <span className="bold">Native Name: </span>
+                {Object.values(currentCountry.name.nativeName)[0].common}
+              </p>
+              <p>
+                <span className="bold">Population:</span>{" "}
+                {currentCountry.population}
+              </p>
+              <p>
+                <span className="bold">Region:</span> {currentCountry.region}
+              </p>
+              <p>
+                <span className="bold">Sub Region:</span>{" "}
+                {currentCountry.subregion}
+              </p>
+              <p>
+                <span className="bold">Capital:</span>{" "}
+                {currentCountry.capital}
+              </p>
+            </div>
+            <div className="sub">
+              <p>
+                <span className="bold">Top Level Domain:</span>{" "}
+                {currentCountry.tld}
+              </p>
+              <p>
+                <span className="bold">Currencies:</span>{" "}
+                {Object.values(currentCountry.currencies)[0].name}
+              </p>
+              <p>
+                <span className="bold">Languages: </span>
+                {Object.values(currentCountry.languages).join(", ")}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="footer">
-          <p>Border Countries: </p>
-          <div className="box-btns">
-            {currentCountry[0].borders &&
-              currentCountry[0].borders.map((country, index) => (
-                <button
-                  key={index}
-                  onClick={() => navigateToCountry(country)}
-                  data-name={country}
-                >
-                  {country}
-                </button>
-              ))}
+          <div className="footer">
+            <p className="bold">Border Countries: </p>
+            <div className="box-btns">
+              {currentCountry.borders &&
+                currentCountry.borders.map((country, index) => (
+                  <button
+                    key={index}
+                    onClick={() => navigateToCountry(country)}
+                    data-name={country}
+                  >
+                    {country}
+                  </button>
+                ))}
+            </div>
           </div>
         </div>
       </div>

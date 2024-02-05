@@ -24,7 +24,7 @@ export function useFetch({ url, options = {} }) {
         const data = await response.json();
         setDatas(data);
       } catch (e) {
-        console.log(`Erreur lors de l'appel à l'API ${e}`)
+        // console.log(`Erreur lors de l'appel à l'API ${e}`)
         setErrors(e);
       } finally {
         setLoading(false);

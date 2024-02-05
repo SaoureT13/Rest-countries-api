@@ -5,6 +5,7 @@ import {
   defer,
   Outlet,
   RouterProvider,
+  useLocation,
   useRouteError,
 } from "react-router-dom";
 import { SearchBar } from "./Components/SearchBar/SearchBar";
@@ -27,11 +28,11 @@ const router = createBrowserRouter([
           const countryName = params.countryName;
           const response = await fetch("https://restcountries.com/v3.1/all");
           const datas = await response.json();
-          
-          const currentCountry = datas.filter(
+
+          const currentCountry = datas.find(
             (data) => data.name.common === countryName
           );
-        
+
           return defer({
             //Ma premiere solution, je recupere la reponse entiere
             datas,
@@ -53,10 +54,9 @@ function Root() {
   const [currentUrl, setCurrentUrl] = useState(
     "https://restcountries.com/v3.1/all"
   );
-  // const [currentCountry, setCurrentCountry] = useState([]);
 
   //Recupereation du resultat de l'appel Fetch
-  const { datas } = useFetch({
+  const { datas, error } = useFetch({
     url: currentUrl,
   });
 
@@ -66,7 +66,6 @@ function Root() {
       const newUrl = `https://restcountries.com/v3.1/translation/${value.trim()}`;
       setCurrentUrl(newUrl);
     }
-    console.log(value);
   }, [value]);
 
   //Fonction pour mettre a jour le filtrer selon le choix du continent des pays
@@ -83,28 +82,26 @@ function Root() {
     }
   }, [filter]);
 
-  // const handleFlagClick = (countryName) => {
-  //   const country = datas.filter((data) => data.name.common === countryName);
-  //   console.log(country);
-
-  //   setCurrentCountry(country);
-  // };
+  const location = useLocation();
 
   return (
     <>
       <Header></Header>
-      <SearchBar
-        placeHolder="Search for a country..."
-        value={value}
-        onChange={setValue}
-        handleChoiseFilter={handleChoiseFilter}
-      />
+
       <Outlet></Outlet>
-      <div className="container">
-        <Card datas={datas} 
-        // onClick={handleFlagClick}
-         />
-      </div>
+      {/*Je me suis basé sur la longueur de mon url pour afficher tous les pays ou non, parce que j'avais pas d'autre idée*/}
+      {location.pathname.length == 1 && (
+        <div className="container">
+          <SearchBar
+            placeHolder="Search for a country..."
+            value={value}
+            onChange={setValue}
+            handleChoiseFilter={handleChoiseFilter}
+            filter={filter}
+          />
+          {!error && <Card datas={datas} />}
+        </div>
+      )}
     </>
   );
 }
