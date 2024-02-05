@@ -2,6 +2,7 @@ import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
 
 export function Details() {
   const { datas, currentCountry } = useLoaderData();
+  
 
   // const { countryName } = useParams();
 
@@ -27,7 +28,7 @@ export function Details() {
 
   return (
     <main className="main">
-      <NavLink to="/Rest-countries-api" className="back_btn">
+      <NavLink to="/Rest-countries-api/" className="back_btn">
         Back
       </NavLink>
       <div className="wrapper">
@@ -49,7 +50,7 @@ export function Details() {
               </p>
               <p>
                 <span className="bold">Population:</span>{" "}
-                {currentCountry.population}
+                {currentCountry.population.toLocaleString('en-US')}
               </p>
               <p>
                 <span className="bold">Region:</span> {currentCountry.region}

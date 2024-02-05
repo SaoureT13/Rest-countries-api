@@ -58,12 +58,18 @@ function Root() {
   //Recupereation du resultat de l'appel Fetch
   const { datas, error } = useFetch({
     url: currentUrl,
+    options: ""
   });
 
   //Recuperation de la valeur du champ textuel
   useEffect(() => {
-    if (value) {
+    if (value.length > 0) {
       const newUrl = `https://restcountries.com/v3.1/translation/${value.trim()}`;
+      setCurrentUrl(newUrl);
+      setFilter("")
+    }
+    if(value.length == 0){
+      const newUrl = `https://restcountries.com/v3.1/all`;
       setCurrentUrl(newUrl);
     }
   }, [value]);
@@ -71,7 +77,15 @@ function Root() {
   //Fonction pour mettre a jour le filtrer selon le choix du continent des pays
   const handleChoiseFilter = (e) => {
     const fil = e.target.dataset.value;
-    setFilter(fil);
+    if(filter == "" ){
+      setFilter(fil);
+    }
+    if(filter == fil){
+      setFilter("");
+      const newUrl = `https://restcountries.com/v3.1/all`;
+      setCurrentUrl(newUrl);
+    }
+    setValue("")
   };
 
   //Le useEffect observe filter, s'il contient une valeur alors là il met à jour l'URL pour la requete a l'api en y ajoutant la "region choisi"
@@ -83,6 +97,7 @@ function Root() {
   }, [filter]);
 
   const location = useLocation();
+  // console.log(location.pathname)
 
   return (
     <>
@@ -90,7 +105,7 @@ function Root() {
 
       <Outlet></Outlet>
       {/*Je me suis basé sur la longueur de mon url pour afficher tous les pays ou non, parce que j'avais pas d'autre idée*/}
-      {location.pathname.length >= 1 && (
+      {location.pathname == "/Rest-countries-api/" && (
         <div className="container">
           <SearchBar
             placeHolder="Search for a country..."

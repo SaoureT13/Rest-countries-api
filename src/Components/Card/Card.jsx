@@ -24,7 +24,7 @@ export function Card({ datas }) {
       <div className="body">
         <h3 className="countryName">{data.name.common}</h3>
         <p className="countryPopulation">
-          <span className="bold">Population:</span> {data?.population.toLocaleString()}
+          <span className="bold">Population:</span> {data?.population.toLocaleString('en-US')}
         </p>
         <p className="countryRegion">
           <span className="bold">Region:</span> {data?.region}
