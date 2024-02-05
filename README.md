@@ -33,7 +33,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: (https://github.com/SaoureT13/Rest-countries-api.git)
-- Live Site URL: (https://saouret13.github.io/Static-job-listing-masters/)
+- Live Site URL: (https://saouret13.github.io/Rest-countries-api/)
 
 ## My process
 
