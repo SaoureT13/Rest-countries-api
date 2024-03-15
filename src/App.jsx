@@ -77,7 +77,7 @@ function Root() {
   //Fonction pour mettre a jour le filtrer selon le choix du continent des pays
   const handleChoiseFilter = (e) => {
     const fil = e.target.dataset.value;
-    if(filter == "" ){
+    if(filter == "" || filter ){
       setFilter(fil);
     }
     if(filter == fil){
